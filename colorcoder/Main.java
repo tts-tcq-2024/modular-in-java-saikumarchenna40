@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ColorCodeLookup {
+public class Main {
 
     // Define the 25-pair color code mapping
     private static final Map<Integer, String[]> colorCodeMap = new HashMap<>();
