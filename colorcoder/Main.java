@@ -1,120 +1,53 @@
-package colorcoder;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
-public class Main {
-    enum MajorColor {
-        WHITE(0),
-        RED(1),
-        BLACK(2),
-        YELLOW(3),
-        VIOLET(4);
-        private int index;
-        private MajorColor(int index) {
-            this.index = index;
-        }
-        int getIndex() {
-            return index;
-        }
-        public static MajorColor fromIndex(int index) {
-            for(MajorColor color: MajorColor.values()) {
-                if(color.getIndex() == index) {
-                    return color;
-                }
-            }
-            return null;
-        }
-    };
-    enum MinorColor {
-        BLUE(0),
-        ORANGE(1),
-        GREEN(2),
-        BROWN(3),
-        SLATE(4);
-        private int index;
-        private MinorColor(int index) {
-            this.index = index;
-        }
-        int getIndex() {
-            return index;
-        }
-        public static MinorColor fromIndex(int index) {
-            for(MinorColor color: MinorColor.values()) {
-                if(color.getIndex() == index) {
-                    return color;
-                }
-            }
-            return null;
-        }
-    };
+public class ColorCodeLookup {
 
-    final static String MajorColorNames[] = {
-        "White", "Red", "Black", "Yellow", "Violet"
-    };
-    final static int numberOfMajorColors = MajorColorNames.length;
-    final static String MinorColorNames[] = {
-        "Blue", "Orange", "Green", "Brown", "Slate"
-    };
-    final static int numberOfMinorColors = MinorColorNames.length;
+    // Define the 25-pair color code mapping
+    private static final Map<Integer, String[]> colorCodeMap = new HashMap<>();
 
-    static class ColorPair {
-        private MajorColor majorColor;
-        private MinorColor minorColor;
-        
-        public ColorPair(MajorColor major, MinorColor minor)
-        {
-            majorColor = major;
-            minorColor = minor;
-        }
-        public MajorColor getMajor() {
-            return majorColor;
-        }
-        public MinorColor getMinor() {
-            return minorColor;
-        }
-        String ToString() {
-            String colorPairStr = MajorColorNames[majorColor.getIndex()];
-            colorPairStr += " ";
-            colorPairStr += MinorColorNames[minorColor.getIndex()];
-            return colorPairStr;
-        }
-    };
-
-    static ColorPair GetColorFromPairNumber(int pairNumber) {
-        int zeroBasedPairNumber = pairNumber - 1;
-        MajorColor majorColor = 
-            MajorColor.fromIndex(zeroBasedPairNumber / numberOfMinorColors);
-        MinorColor minorColor =
-            MinorColor.fromIndex(zeroBasedPairNumber % numberOfMinorColors);
-        return new ColorPair(majorColor, minorColor);
-    }
-    static int GetPairNumberFromColor(MajorColor major, MinorColor minor) {
-        return major.getIndex() * numberOfMinorColors + minor.getIndex() + 1;
-    }
-
-    static void testNumberToPair(int pairNumber,
-        MajorColor expectedMajor,
-        MinorColor expectedMinor)
-    {
-        ColorPair colorPair = GetColorFromPairNumber(pairNumber);
-        System.out.println("Got pair " + colorPair.ToString());
-        assert(colorPair.getMajor() == expectedMajor);
-        assert(colorPair.getMinor() == expectedMinor);
-    }
-
-    static void testPairToNumber(
-        MajorColor major,
-        MinorColor minor,
-        int expectedPairNumber)
-    {
-        int pairNumber = GetPairNumberFromColor(major, minor);
-        System.out.println("Got pair number " + pairNumber);
-        assert(pairNumber == expectedPairNumber);
+    static {
+        colorCodeMap.put(1, new String[]{"Blue", "White"});
+        colorCodeMap.put(2, new String[]{"Orange", "White"});
+        colorCodeMap.put(3, new String[]{"Green", "White"});
+        colorCodeMap.put(4, new String[]{"Brown", "White"});
+        colorCodeMap.put(5, new String[]{"Slate", "White"});
+        colorCodeMap.put(6, new String[]{"Blue", "Orange"});
+        colorCodeMap.put(7, new String[]{"Blue", "Green"});
+        colorCodeMap.put(8, new String[]{"Blue", "Brown"});
+        colorCodeMap.put(9, new String[]{"Blue", "Slate"});
+        colorCodeMap.put(10, new String[]{"Orange", "Green"});
+        colorCodeMap.put(11, new String[]{"Orange", "Brown"});
+        colorCodeMap.put(12, new String[]{"Orange", "Slate"});
+        colorCodeMap.put(13, new String[]{"Green", "Brown"});
+        colorCodeMap.put(14, new String[]{"Green", "Slate"});
+        colorCodeMap.put(15, new String[]{"Brown", "Slate"});
+        colorCodeMap.put(16, new String[]{"Blue", "Blue"});
+        colorCodeMap.put(17, new String[]{"Orange", "Orange"});
+        colorCodeMap.put(18, new String[]{"Green", "Green"});
+        colorCodeMap.put(19, new String[]{"Brown", "Brown"});
+        colorCodeMap.put(20, new String[]{"Slate", "Slate"});
+        colorCodeMap.put(21, new String[]{"Blue", "White"});
+        colorCodeMap.put(22, new String[]{"Orange", "White"});
+        colorCodeMap.put(23, new String[]{"Green", "White"});
+        colorCodeMap.put(24, new String[]{"Brown", "White"});
+        colorCodeMap.put(25, new String[]{"Slate", "White"});
     }
 
     public static void main(String[] args) {
-        testNumberToPair(4, MajorColor.WHITE, MinorColor.BROWN);
-        testNumberToPair(5, MajorColor.WHITE, MinorColor.SLATE);
-    
-        testPairToNumber(MajorColor.BLACK, MinorColor.ORANGE, 12);
-        testPairToNumber(MajorColor.VIOLET, MinorColor.SLATE, 25);
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter the pair number (1-25) to get the color code:");
+        int pairNumber = scanner.nextInt();
+        
+        if (pairNumber < 1 || pairNumber > 25) {
+            System.out.println("Invalid pair number. Please enter a number between 1 and 25.");
+        } else {
+            String[] colors = colorCodeMap.get(pairNumber);
+            System.out.printf("Pair %d: Major Color - %s, Minor Color - %s%n", pairNumber, colors[0], colors[1]);
+        }
+
+        scanner.close();
     }
 }
