@@ -49,7 +49,5 @@ public class ColorCodeLookup {
             String[] colors = colorCodeMap.get(pairNumber);
             System.out.printf("Pair %d: Major Color - %s, Minor Color - %s%n", pairNumber, colors[0], colors[1]);
         }
-
-        scanner.close();
     }
 }
