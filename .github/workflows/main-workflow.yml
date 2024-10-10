@@ -19,4 +19,4 @@ jobs:
     - name: Build
       run: javac colorcoder/ColorCodeLookup.java
     - name: Verify color coding
-      run: java -ea -classpath . ColorCodeLookup.Main
+      run: java -ea -classpath . colorcoder.ColorCodeLookup
