@@ -19,4 +19,4 @@ jobs:
     - name: Build
       run: javac ColorCodeMapper.java
     - name: Verify color coding
-      run: java -ea -classpath .ColorCodeMapper
+      run: java -ea -classpath . ColorCodeMapper
