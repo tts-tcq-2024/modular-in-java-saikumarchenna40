@@ -17,6 +17,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build
-      run: javac colorcoder/ColorCodeLookup.java
+      run: javac ColorCodeMapper.java ColorCode.java
     - name: Verify color coding
-      run: java -ea -classpath . colorcoder.ColorCodeLookup
+      run: java -ea -classpath . ColorCodeMapper.ColorCode
