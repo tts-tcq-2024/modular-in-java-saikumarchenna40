@@ -6,6 +6,7 @@ public class ColorCodeMapper {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a number (1-25) to get the corresponding color code pair, or type 'ref' for the reference manual:");
 
+try {
         String input = scanner.nextLine();
 
         if (input.equalsIgnoreCase("ref")) {
@@ -21,7 +22,10 @@ public class ColorCodeMapper {
                 System.out.println(e.getMessage());
             }
         }
+} catch(Exception exception) {
+exception.printStackTrace();
+}
 
         scanner.close();
-    }
+    	}
 }
